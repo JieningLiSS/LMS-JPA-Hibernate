@@ -1,5 +1,4 @@
-package com.ss.lmshibernate.dao;
-
+package com.ss.lmshibernate.repository;
 
 import java.util.Optional;
 
@@ -10,10 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import com.ss.lmshibernate.entity.Book;
 
+
+
 @Repository
-public interface BookDao extends JpaRepository<Book, Long> {
-
-	 Page<Book> findByBookId(Long bookId, Pageable pageable);
-
-
+public interface BookRepository extends JpaRepository<Book, Long> {
+    Page<Book> findByBookId(Long bookId, Pageable pageable);
 }

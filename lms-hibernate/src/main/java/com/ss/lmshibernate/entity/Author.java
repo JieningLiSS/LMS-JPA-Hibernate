@@ -1,34 +1,52 @@
 package com.ss.lmshibernate.entity;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_author")
-public class Author {
+public class Author implements Serializable  {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer authorId;
-	
-	 @Column(name = "authorName")
-	private String authorName;
+    private Long authorId;
+
+    @Column(name = "authorName")
+    public String authorName;
+
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+    private Set<Book> books = new HashSet<>();
+
+    public Author() {
+ 	   
+    }
 
 	/**
 	 * @return the authorId
 	 */
-	public Integer getAuthorId() {
+	public Long getAuthorId() {
 		return authorId;
 	}
 
 	/**
 	 * @param authorId the authorId to set
 	 */
-	public void setAuthorId(Integer authorId) {
+	public void setAuthorId(Long authorId) {
 		this.authorId = authorId;
 	}
 
@@ -46,4 +64,20 @@ public class Author {
 		this.authorName = authorName;
 	}
 
+	/**
+	 * @return the books
+	 */
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	/**
+	 * @param books the books to set
+	 */
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}
+    
+    
+    
 }
