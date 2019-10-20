@@ -1,4 +1,7 @@
 package com.ss.lmshibernate.entity;
+
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,30 +11,38 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_library_branch")
-public class LibraryBranch {
-	
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer branchId;
-	 
-	  @Column(name = "branchName")
+public class LibraryBranch implements Serializable {
+
+	/**
+	* 
+	*/
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long branchId;
+
+	@Column(name = "branchName")
 	private String branchName;
-	
-	  @Column(name = "branchAddress")
+
+	@Column(name = "branchAddress")
 	private String branchAddress;
 
-	
+	public LibraryBranch() {
+
+	}
+
 	/**
 	 * @return the branchId
 	 */
-	public Integer getBranchId() {
+	public Long getBranchId() {
 		return branchId;
 	}
 
 	/**
 	 * @param branchId the branchId to set
 	 */
-	public void setBranchId(Integer branchId) {
+	public void setBranchId(Long branchId) {
 		this.branchId = branchId;
 	}
 

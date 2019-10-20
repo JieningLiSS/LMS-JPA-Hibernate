@@ -15,42 +15,40 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_publisher")
-public class Publisher implements Serializable  {
-	
-    /**
+public class Publisher implements Serializable {
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long publisherId;
-    
-    @Column(name = "publisherName")
+
+	@Column(name = "publisherName")
 	private String publisherName;
-    
-    @Column(name = "publisherAddress")
+
+	@Column(name = "publisherAddress")
 	private String publisherAddress;
-    
-    @Column(name = "publisherPhone")
-   	private String publisherPhone;
 
-    
-    @OneToMany(mappedBy = "publisher", fetch = FetchType.LAZY)
-    private Set<Book> books = new HashSet<>();
+	@Column(name = "publisherPhone")
+	private String publisherPhone;
 
-   public Publisher() {
-	   
-   }
-    
-    
+	@OneToMany(mappedBy = "publisher", fetch = FetchType.LAZY)
+	private Set<Book> books = new HashSet<>();
+
+	public Publisher() {
+
+	}
+
 	/**
 	 * @return the publisherId
 	 */
 	public Long getPublisherId() {
 		return publisherId;
 	}
-		
+
 	/**
 	 * @param publisherId the publisherId to set
 	 */
@@ -99,7 +97,7 @@ public class Publisher implements Serializable  {
 	public void setPublisherPhone(String publisherPhone) {
 		this.publisherPhone = publisherPhone;
 	}
-	
+
 	/**
 	 * @return the books
 	 */
@@ -113,6 +111,5 @@ public class Publisher implements Serializable  {
 	public void setBooks(Set<Book> books) {
 		this.books = books;
 	}
-	
-	
+
 }

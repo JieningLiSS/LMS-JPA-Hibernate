@@ -26,39 +26,38 @@ import com.ss.lmshibernate.repository.AuthorRepository;
 import com.ss.lmshibernate.repository.PublisherRepository;
 
 @RestController
-@RequestMapping("/lms")
+@RequestMapping(value = "/lms/admin*")
 public class PublisherController {
-	
-	  @Autowired
-	    PublisherRepository publisherRepository;
 
-	    @GetMapping("/publishers")
-	    public Page<Publisher> getAllPublishers(Pageable pageable) {
-	        return publisherRepository.findAll(pageable);
-	    }
+	@Autowired
+	PublisherRepository publisherRepository;
 
-	    @PostMapping("/publishers")
-	    public Publisher createPublisher(@Valid @RequestBody Publisher publisher) {
-	        return publisherRepository.save(publisher);
-	    }
+	@GetMapping("/publishers")
+	public Page<Publisher> getAllPublishers(Pageable pageable) {
+		return publisherRepository.findAll(pageable);
+	}
 
-	    @PutMapping("/publishers/{publisherId}")
-	    public Publisher updatePublisher(@PathVariable Long publisherId, @Valid @RequestBody Publisher publisherRequest) {
-	        return publisherRepository.findById(publisherId).map(publisher -> {
-	        	publisher.setPublisherName(publisherRequest.getPublisherName());
-	        	publisher.setPublisherAddress(publisherRequest.getPublisherAddress());
-	        	publisher.setPublisherPhone(publisherRequest.getPublisherPhone());
-	            return publisherRepository.save(publisher);
-	        }).orElseThrow(() -> new ResourceNotFoundException("PublisherId " + publisherId + " not found"));
-	    }
+	@PostMapping("/publishers")
+	public Publisher createPublisher(@Valid @RequestBody Publisher publisher) {
+		return publisherRepository.save(publisher);
+	}
 
+	@PutMapping("/publishers/{publisherId}")
+	public Publisher updatePublisher(@PathVariable Long publisherId, @Valid @RequestBody Publisher publisherRequest) {
+		return publisherRepository.findById(publisherId).map(publisher -> {
+			publisher.setPublisherName(publisherRequest.getPublisherName());
+			publisher.setPublisherAddress(publisherRequest.getPublisherAddress());
+			publisher.setPublisherPhone(publisherRequest.getPublisherPhone());
+			return publisherRepository.save(publisher);
+		}).orElseThrow(() -> new ResourceNotFoundException("PublisherId " + publisherId + " not found"));
+	}
 
-	    @DeleteMapping("/publishers/{publisherId}")
-	    public ResponseEntity<?> deletePost(@PathVariable Long publisherId) {
-	        return publisherRepository.findById(publisherId).map(publisher -> {
-	        	publisherRepository.delete(publisher);
-	            return ResponseEntity.ok().build();
-	        }).orElseThrow(() -> new ResourceNotFoundException("PublisherId " + publisherId + " not found"));
-	    }
-	
+	@DeleteMapping("/publishers/{publisherId}")
+	public ResponseEntity<?> deletePost(@PathVariable Long publisherId) {
+		return publisherRepository.findById(publisherId).map(publisher -> {
+			publisherRepository.delete(publisher);
+			return ResponseEntity.ok().build();
+		}).orElseThrow(() -> new ResourceNotFoundException("PublisherId " + publisherId + " not found"));
+	}
+
 }

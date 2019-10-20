@@ -1,5 +1,7 @@
 package com.ss.lmshibernate.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,77 +11,84 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_borrower")
-public class Borrower {
-	
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-		private Integer cardNo;
-	 
-	  @Column(name = "name")
-		private String name;
-	    
-	    @Column(name = "address")
-		private String address;
-	    
-		@Column(name = "phone")
-	   	private String phone;
-		
-	    
-	    /**
-		 * @return the cardNo
-		 */
-		public Integer getCardNo() {
-			return cardNo;
-		}
+public class Borrower implements Serializable {
 
-		/**
-		 * @param cardNo the cardNo to set
-		 */
-		public void setCardNo(Integer cardNo) {
-			this.cardNo = cardNo;
-		}
+	/**
+	* 
+	*/
+	private static final long serialVersionUID = 1L;
 
-		/**
-		 * @return the name
-		 */
-		public String getName() {
-			return name;
-		}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long cardNo;
 
-		/**
-		 * @param name the name to set
-		 */
-		public void setName(String name) {
-			this.name = name;
-		}
+	@Column(name = "name")
+	private String name;
 
-		/**
-		 * @return the address
-		 */
-		public String getAddress() {
-			return address;
-		}
+	@Column(name = "address")
+	private String address;
 
-		/**
-		 * @param address the address to set
-		 */
-		public void setAddress(String address) {
-			this.address = address;
-		}
+	@Column(name = "phone")
+	private String phone;
 
-		/**
-		 * @return the phone
-		 */
-		public String getPhone() {
-			return phone;
-		}
+	public Borrower() {
 
-		/**
-		 * @param phone the phone to set
-		 */
-		public void setPhone(String phone) {
-			this.phone = phone;
-		}
+	}
 
+	/**
+	 * @return the cardNo
+	 */
+	public Long getCardNo() {
+		return cardNo;
+	}
+
+	/**
+	 * @param cardNo the cardNo to set
+	 */
+	public void setCardNo(Long cardNo) {
+		this.cardNo = cardNo;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	/**
+	 * @return the phone
+	 */
+	public String getPhone() {
+		return phone;
+	}
+
+	/**
+	 * @param phone the phone to set
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 }

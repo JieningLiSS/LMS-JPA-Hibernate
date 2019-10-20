@@ -1,9 +1,11 @@
-package com.ss.lmshibernate.dao;
+package com.ss.lmshibernate.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 import com.ss.lmshibernate.entity.Borrower;
+
 @Repository
-public interface BorrowerDao extends JpaRepository<Borrower, Long> {
+public interface BorrowerRepository extends JpaRepository<Borrower, Long> {
 
 }

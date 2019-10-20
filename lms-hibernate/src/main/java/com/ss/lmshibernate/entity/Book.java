@@ -17,31 +17,30 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tbl_book")
-public class Book implements Serializable  {
-    /**
+public class Book implements Serializable {
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bookId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long bookId;
 
-    @Column(name = "title")
-    private String title;
+	@Column(name = "title")
+	private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "authorId", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Author author;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publisherId", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Publisher publisher;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "authorId", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
+	private Author author;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "publisherId", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
+	private Publisher publisher;
 
 	/**
 	 * @return the bookId
@@ -50,14 +49,12 @@ public class Book implements Serializable  {
 		return bookId;
 	}
 
-
 	/**
 	 * @param bookId the bookId to set
 	 */
 	public void setBookId(Long bookId) {
 		this.bookId = bookId;
 	}
-
 
 	/**
 	 * @return the title
@@ -66,14 +63,12 @@ public class Book implements Serializable  {
 		return title;
 	}
 
-
 	/**
 	 * @param title the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 	/**
 	 * @return the author
@@ -83,7 +78,6 @@ public class Book implements Serializable  {
 		return author;
 	}
 
-
 	/**
 	 * @param author the author to set
 	 */
@@ -91,7 +85,6 @@ public class Book implements Serializable  {
 	public void setAuthor(Author author) {
 		this.author = author;
 	}
-
 
 	/**
 	 * @return the publisher
@@ -101,7 +94,6 @@ public class Book implements Serializable  {
 		return publisher;
 	}
 
-
 	/**
 	 * @param publisher the publisher to set
 	 */
@@ -109,7 +101,5 @@ public class Book implements Serializable  {
 	public void setPublisher(Publisher publisher) {
 		this.publisher = publisher;
 	}
-
-    
 
 }

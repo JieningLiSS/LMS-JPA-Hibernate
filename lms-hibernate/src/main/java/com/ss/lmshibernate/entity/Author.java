@@ -15,26 +15,19 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_author")
-public class Author implements Serializable  {
-
-    /**
-	 * 
-	 */
+public class Author implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long authorId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long authorId;
 
-    @Column(name = "authorName")
-    public String authorName;
+	@Column(name = "authorName")
+	public String authorName;
 
-    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-    private Set<Book> books = new HashSet<>();
+	public Author() {
 
-    public Author() {
- 	   
-    }
+	}
 
 	/**
 	 * @return the authorId
@@ -64,20 +57,4 @@ public class Author implements Serializable  {
 		this.authorName = authorName;
 	}
 
-	/**
-	 * @return the books
-	 */
-	public Set<Book> getBooks() {
-		return books;
-	}
-
-	/**
-	 * @param books the books to set
-	 */
-	public void setBooks(Set<Book> books) {
-		this.books = books;
-	}
-    
-    
-    
 }
