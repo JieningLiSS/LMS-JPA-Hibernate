@@ -2,42 +2,71 @@ package com.ss.lmshibernate.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Embeddable
 public class BookLoanId implements Serializable {
 
-	private Long branchId;
-	private Long bookId;
-	private Long cardNo;
+	private static final long serialVersionUID = 1L;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "branchId",nullable = false)
+	private LibraryBranch libraryBranch;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "bookId",nullable = false)
+	private Book book;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "cardNo",nullable = false)
+	private Borrower borrower;
 
 	public BookLoanId() {
 
 	}
-
-	public BookLoanId(Long branchId, Long bookId, Long cardNo) {
-		this.branchId = branchId;
-		this.bookId = bookId;
-		this.bookId = bookId;
+	public BookLoanId(LibraryBranch libraryBranch,Book book,Borrower borrower) {
+		super();
+		this.libraryBranch = libraryBranch;
+		this.book = book;
+		this.borrower = borrower;
 	}
 
-	public Long getBranchId() {
-		return branchId;
+	public LibraryBranch getLibraryBranch() {
+		return libraryBranch;
 	}
 
-	public Long getBookId() {
-		return bookId;
+	public void setLibraryBranch(LibraryBranch libraryBranch) {
+		this.libraryBranch = libraryBranch;
 	}
 
-	public Long getCardNo() {
-		return cardNo;
+	public Book getBook() {
+		return book;
 	}
 
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public Borrower getBorrower() {
+		return borrower;
+	}
+
+	public void setBorrower(Borrower borrower) {
+		this.borrower = borrower;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = (int) (prime * result + branchId + bookId + cardNo);
+		result = prime * result + ((book == null) ? 0 : book.hashCode());
+		result = prime * result + ((borrower == null) ? 0 : borrower.hashCode());
+		result = prime * result + ((libraryBranch == null) ? 0 : libraryBranch.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -47,12 +76,22 @@ public class BookLoanId implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BookLoanId other = (BookLoanId) obj;
-		if (bookId != other.bookId) {
+		if (book == null) {
+			if (other.book != null)
+				return false;
+		} else if (!book.equals(other.book))
 			return false;
-		} else if (cardNo != other.cardNo)
+		if (borrower == null) {
+			if (other.borrower != null)
+				return false;
+		} else if (!borrower.equals(other.borrower))
 			return false;
-		else if (branchId != other.branchId)
+		if (libraryBranch == null) {
+			if (other.libraryBranch != null)
+				return false;
+		} else if (!libraryBranch.equals(other.libraryBranch))
 			return false;
 		return true;
 	}
+
 }

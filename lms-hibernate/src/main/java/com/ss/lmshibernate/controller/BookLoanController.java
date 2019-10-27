@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ss.lmshibernate.entity.Author;
 import com.ss.lmshibernate.entity.Book;
 import com.ss.lmshibernate.entity.BookLoan;
+import com.ss.lmshibernate.entity.BookLoanId;
+import com.ss.lmshibernate.entity.Borrower;
+import com.ss.lmshibernate.entity.LibraryBranch;
 import com.ss.lmshibernate.entity.Publisher;
 import com.ss.lmshibernate.exception.ResourceNotFoundException;
 import com.ss.lmshibernate.repository.AuthorRepository;
@@ -43,25 +46,19 @@ public class BookLoanController {
 	LibraryBranchRepository libraryBranchRepository;
 
 	@PutMapping("/duedate/{bookId}/{branchId}/{cardNo}")
-	public void updateBookLoan(@PathVariable(value = "bookId") Long bookId, @PathVariable(value = "cardNo") Long cardNo,
+	public BookLoan updateBookLoan(@PathVariable(value = "bookId") Long bookId, @PathVariable(value = "cardNo") Long cardNo,
 			@PathVariable(value = "branchId") Long branchId, @Valid @RequestBody BookLoan bookLoanRequest) {
 
 		if (!bookRepository.existsById(bookId) && !borrowerRepository.existsById(cardNo)
 				&& !libraryBranchRepository.existsById(branchId)) {
 			throw new ResourceNotFoundException("CardNo  or branchId or bookId  not found");
 		}
-		BookLoan bookLoan = new BookLoan();
-		bookLoan.setBookId(bookId);
-		bookLoan.setBranchId(branchId);
-		bookLoan.setCardNo(cardNo);
-		bookLoan.setDateOut(bookLoanRequest.getDateOut());
-		bookLoan.setDueDate(bookLoanRequest.getDueDate());
-		bookLoanRepository.save(bookLoan);
-
-//	        return bookLoanRepository.findByIds(bookId, branchId, cardNo).map(bookLoan -> {
-//	        	bookLoan.setDueDate(bookLoanRequest.getDueDate());
-//	            return bookLoanRepository.save(bookLoan);
-//	        }).orElseThrow(() -> new ResourceNotFoundException("BookId or branchId or cardNo not found"));
+		Book book = bookRepository.findById(bookId).get();
+		LibraryBranch libraryBranch = libraryBranchRepository.findById(branchId).get();
+		Borrower borrower = borrowerRepository.findById(cardNo).get();
+		BookLoanId bookLoanId = new BookLoanId(libraryBranch,book,borrower);
+        BookLoan bookLoan = new BookLoan(bookLoanRequest.getDueDate(),bookLoanId);
+       
+        return bookLoanRepository.save(bookLoan);
 	}
-
 }
