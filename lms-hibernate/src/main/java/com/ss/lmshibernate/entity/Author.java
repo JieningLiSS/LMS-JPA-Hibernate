@@ -20,7 +20,7 @@ public class Author implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long authorId;
+	private Integer authorId;
 
 	@Column(name = "authorName")
 	public String authorName;
@@ -32,14 +32,14 @@ public class Author implements Serializable {
 	/**
 	 * @return the authorId
 	 */
-	public Long getAuthorId() {
+	public Integer getAuthorId() {
 		return authorId;
 	}
 
 	/**
 	 * @param authorId the authorId to set
 	 */
-	public void setAuthorId(Long authorId) {
+	public void setAuthorId(Integer authorId) {
 		this.authorId = authorId;
 	}
 

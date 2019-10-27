@@ -43,7 +43,7 @@ public class AuthorController<X> {
 	}
 
 	@PutMapping("/authors/{authorId}")
-	public Author updateAuthor(@PathVariable Long authorId, @Valid @RequestBody Author authorRequest) {
+	public Author updateAuthor(@PathVariable Integer authorId, @Valid @RequestBody Author authorRequest) {
 		return authorRepository.findById(authorId).map(author -> {
 			author.setAuthorName(authorRequest.getAuthorName());
 			return authorRepository.save(author);
@@ -51,7 +51,7 @@ public class AuthorController<X> {
 	}
 
 	@DeleteMapping("/authors/{authorId}")
-	public ResponseEntity<?> deleteAuthor(@PathVariable Long authorId) {
+	public ResponseEntity<?> deleteAuthor(@PathVariable Integer authorId) {
 		return authorRepository.findById(authorId).map(author -> {
 			authorRepository.delete(author);
 			return ResponseEntity.ok().build();

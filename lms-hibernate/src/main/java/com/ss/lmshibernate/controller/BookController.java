@@ -46,7 +46,7 @@ public class BookController {
 	}
 
 	@PostMapping("/books/{authorId}/{publisherId}")
-	public Book createBook(@PathVariable(value = "authorId") Long authorId,
+	public Book createBook(@PathVariable(value = "authorId") Integer authorId,
 			@PathVariable(value = "publisherId") Long publisherId, @Valid @RequestBody Book book) {
 
 		if (!authorRepository.existsById(authorId)) {
@@ -66,7 +66,7 @@ public class BookController {
 	}
 
 	@PutMapping("/books/{bookId}/{authorId}/{publisherId}")
-	public Book updateBook(@PathVariable(value = "bookId") Long bookId, @PathVariable(value = "authorId") Long authorId,
+	public Book updateBook(@PathVariable(value = "bookId") Long bookId, @PathVariable(value = "authorId") Integer authorId,
 			@PathVariable(value = "publisherId") Long publisherId, @Valid @RequestBody Book bookRequest) {
 
 		if (!authorRepository.existsById(authorId) && !publisherRepository.existsById(publisherId)) {
