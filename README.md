@@ -6,4 +6,4 @@ library-management-system-mysql
 2. Project consists entities,services and front controler three parts.
 3. Hibernate is used for ORM mapping date fron entities to MySql database.
 4. One to one, one to many and many to one relationship mapping are used in ORM.
-5. Unit testing is added.
+5. Mockhitico Unit testing is added.
