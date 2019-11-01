@@ -8,5 +8,6 @@ public class LmsHibernateApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LmsHibernateApplication.class, args);
+		System.out.println("Admin service in online!");
 	}
 }
